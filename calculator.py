@@ -38,56 +38,62 @@ def demical_to_fraction(n, zero_num=0):
 
 
 def change(a):   # *,/ 转成 ×，÷
-    if a == '*':
-        a = '×'
-    elif a == '/':
-        a = '÷'
-    return a
+    return a.replace('*', '×').replace("/", '÷')
+
+
+def natural(area):  # 生成一个自然数运算
+    operator_num = random.randint(1, 3)  # 随机运算符
+    expression = print_expression = str(random.randint(1, area))  # 第一个数
+    bracket = (random.choice(['(', '']) if not operator_num == 1 else '')  # 非单运算符 可加括号
+    for i in range(operator_num):  # 随机个运算符
+        op = str(random.choice(operators))  # 随机选择运算符 (+ - * /)
+        num = str(random.randint(1, area))  # 随机数值，不超过area
+        if bracket == ')':  # 右括号在数字右边
+            print_expression += ' ' + change(op) + ' ' + num + bracket  # 用于输出的表达式  例：1×2
+            expression += op + num + bracket  # 用于eval()计算的表达式 例：1*2
+        else:  # 左括号在数字左边
+            print_expression += ' ' + change(op) + ' ' + bracket + num
+            expression += op + bracket + num
+        bracket = (')' if bracket == '(' else '')  # 左括号配右括号， 空配空
+    return expression, print_expression
+
+
+def fraction(area):  # 生成一个分数运算
+    operator_num = random.randint(1, 3)  # 随机运算符
+    expression = print_expression = str(Fraction(random.randint(1, area), random.randint(1, area)))  # 第一个分数
+    bracket = (random.choice(['(', '']) if not operator_num == 1 else '')
+    for i in range(operator_num):
+        op = str(random.choice(operators))
+        num = Fraction(random.randint(1, area), random.randint(1, area))  # 生成随机分数
+        if bracket == ')':
+            if float(num) > 1 and not str(num - int(num)) == '0':  # 假分数转带分数
+                print_expression += ' ' + change(op) + ' ' + str(int(num)) + "'" + str(num - int(num)) + bracket
+            elif float(num) > 1:
+                print_expression += ' ' + change(op) + ' ' + str(int(num)) + bracket
+            else:
+                print_expression += ' ' + change(op) + ' ' + str(num) + bracket
+            expression += op + str(num) + bracket
+        else:
+            if float(num) > 1 and not str(num - int(num)) == '0':  # 假分数 例：8/3
+                print_expression += ' ' + change(op) + ' ' + bracket + str(int(num)) + "'" + str(num - int(num))
+            elif float(num) > 1:  # 回炉重造 例：9/3
+                fraction(area)
+                return 0
+            else:
+                print_expression += ' ' + change(op) + ' ' + bracket + str(num)
+            expression += op + bracket + str(num)
+        bracket = (')' if bracket == '(' else '')  # 左括号配右括号
+    return expression, print_expression
 
 
 def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数运算)，运算符不超过3个
-    global sequence
-    operator_num = random.randint(1, 3)  # 随机运算符
     flag = random.randint(1, 2)  # 随机生成 自然或分数 四则运算
     try:
         if flag == 1:  # 自然数运算
-            expression = print_expression = str(random.randint(1, area))  # 第一个数
-            bracket = (random.choice(['(', '']) if not operator_num == 1 else '')  # 非单运算符 可加括号
-            for i in range(operator_num):  # 随机个运算符
-                op = str(random.choice(operators))  # 随机选择运算符 (+ - * /)
-                num = str(random.randint(1, area))  # 随机数值，不超过area
-                if bracket == ')':  # 右括号在数字右边
-                    print_expression += ' ' + change(op) + ' ' + num + bracket  # 用于输出的表达式  例：1×2
-                    expression += op + num + bracket  # 用于eval()计算的表达式 例：1*2
-                else:  # 左括号在数字左边
-                    print_expression += ' ' + change(op) + ' ' + bracket + num
-                    expression += op + bracket + num
-                bracket = (')' if bracket == '(' else '')  # 左括号配右括号， 空配空
+            expression, print_expression = natural(area)  # 生成一个自然数运算
             results = demical_to_fraction(eval(expression))  # 运算结果通过demical_to_fraction()转成分数
         else:  # 分数运算 和上面流程大致相同
-            expression = print_expression = str(Fraction(random.randint(1, area), random.randint(1, area)))  # 第一个分数
-            bracket = (random.choice(['(', '']) if not operator_num == 1 else '')
-            for i in range(operator_num):
-                op = str(random.choice(operators))
-                num = Fraction(random.randint(1, area), random.randint(1, area))  # 生成随机分数
-                if bracket == ')':
-                    if float(num) > 1 and not str(num - int(num)) == '0':  # 假分数转带分数
-                        print_expression += ' ' + change(op) + ' ' + str(int(num)) + "'" + str(num - int(num)) + bracket
-                    elif float(num) > 1:
-                        print_expression += ' ' + change(op) + ' ' + str(int(num)) + bracket
-                    else:
-                        print_expression += ' ' + change(op) + ' ' + str(num) + bracket
-                    expression += op + str(num) + bracket
-                else:
-                    if float(num) > 1 and not str(num - int(num)) == '0':  # 假分数 例：8/3
-                        print_expression += ' ' + change(op) + ' ' + bracket + str(int(num)) + "'" + str(num - int(num))
-                    elif float(num) > 1:  # 回炉重造 例：9/3
-                        problem(area)
-                        return 0
-                    else:
-                        print_expression += ' ' + change(op) + ' ' + bracket + str(num)
-                    expression += op + bracket + str(num)
-                bracket = (')' if bracket == '(' else '')  # 左括号配右括号
+            expression, print_expression = fraction(area)  # 生成一个分数运算
             results = demical_to_fraction(eval(expression))
         if results >= 0 and (str(results) not in answers or print_expression not in prints):  # 结果不为负, 答案不重复
             prints.append(print_expression)
@@ -101,7 +107,7 @@ def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数
 def write_to_file(answers, expressions):
     with open('Exercises.txt', 'w+') as f:
         for i in range(len(answers)):
-            f.write(str(i+1) + '.     ' + str(expressions[i]) +' = '+'\n')  # 存放题目
+            f.write(str(i+1) + '.     ' + str(expressions[i]) + ' = ' + '\n')  # 存放题目
     with open('Answers.txt', 'w+') as f:
         for i in range(len(answers)):
             f.write(str(i+1) + '.' + str(answers[i]) + '\n')  # 存放答案
@@ -127,7 +133,7 @@ if '-r' in opts[len(opts)-1]:  # 题目数值范围
     area = opts[1][1]
     for j in range(int(problem_num)):
         problem(area=int(area))  # 生成题目
-        print(prints[j])
+        print(prints[j] + ' = ')
     write_to_file(answers, prints)
 elif '-n' in opts[0]:  # 参数控制生成题目的个数（必须）
     problem_num = opts[0][1]
