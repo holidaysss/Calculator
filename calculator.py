@@ -90,19 +90,21 @@ def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数
                 bracket = (')' if bracket == '(' else '')  # 左括号配右括号
             results = demical_to_fraction(eval(expression))
         if results >= 0 and (str(results) not in answers or print_expression not in prints):  # 结果不为负, 答案不重复
-            # print(expression)
             prints.append(print_expression)
-            with open('Exercises.txt', 'a+') as f:
-                f.write(str(sequence) + '.     ' + print_expression+' = '+'\n')  # 存放题目
             answers.append(str(results))  # 答案列表
-            with open('Answers.txt', 'a+') as f:
-                f.write(str(sequence) + '.' + str(results) + '\n')  # 存放答案
-            sequence += 1
-            print(print_expression+' = ')  # 例：1+2=
         else:  # 去重复
             problem(area)
     except Exception as e:  # 过滤分母为0的错误
         problem(area)
+
+
+def write_to_file(answers, expressions):
+    with open('Exercises.txt', 'w+') as f:
+        for i in range(len(answers)):
+            f.write(str(i+1) + '.     ' + str(expressions[i]) +' = '+'\n')  # 存放题目
+    with open('Answers.txt', 'w+') as f:
+        for i in range(len(answers)):
+            f.write(str(i+1) + '.' + str(answers[i]) + '\n')  # 存放答案
 
 
 def compare(txt_list):  # 对比题目和答案文件
@@ -118,14 +120,15 @@ def compare(txt_list):  # 对比题目和答案文件
 
 opts, args = getopt.getopt(sys.argv[1:], "hn:r:e:a:")  # 用getopt接收参数
 operators = ['+', '-', '*', '/']
-answers = []
-prints = []
-sequence = 1
+answers, prints = [], []
+
 if '-r' in opts[len(opts)-1]:  # 题目数值范围
     problem_num = opts[0][1]
     area = opts[1][1]
     for j in range(int(problem_num)):
         problem(area=int(area))  # 生成题目
+        print(prints[j])
+    write_to_file(answers, prints)
 elif '-n' in opts[0]:  # 参数控制生成题目的个数（必须）
     problem_num = opts[0][1]
     for j in range(int(problem_num)):
