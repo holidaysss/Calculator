@@ -83,16 +83,18 @@ def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数
                         print_expression += ' ' + change(op) + ' ' + bracket + str(int(num)) + "'" + str(num - int(num))
                     elif float(num) > 1:  # 回炉重造 例：9/3
                         problem(area)
-                        return
+                        return 0
                     else:
                         print_expression += ' ' + change(op) + ' ' + bracket + str(num)
                     expression += op + bracket + str(num)
                 bracket = (')' if bracket == '(' else '')  # 左括号配右括号
             results = demical_to_fraction(eval(expression))
-        if results >= 0 and results not in open('Answers.txt', 'a+'):  # 结果不为负, 答案不重复
+        if results >= 0 and (str(results) not in answers or print_expression not in prints):  # 结果不为负, 答案不重复
             # print(expression)
+            prints.append(print_expression)
             with open('Exercises.txt', 'a+') as f:
                 f.write(str(sequence) + '.     ' + print_expression+' = '+'\n')  # 存放题目
+            answers.append(str(results))  # 答案列表
             with open('Answers.txt', 'a+') as f:
                 f.write(str(sequence) + '.' + str(results) + '\n')  # 存放答案
             sequence += 1
@@ -116,7 +118,8 @@ def compare(txt_list):  # 对比题目和答案文件
 
 opts, args = getopt.getopt(sys.argv[1:], "hn:r:e:a:")  # 用getopt接收参数
 operators = ['+', '-', '*', '/']
-
+answers = []
+prints = []
 sequence = 1
 if '-r' in opts[len(opts)-1]:  # 题目数值范围
     problem_num = opts[0][1]
