@@ -2,6 +2,7 @@ import getopt
 import sys
 import random
 from fractions import Fraction
+import datetime
 
 
 def find_cycle(demical):  # 参数为小数部分
@@ -95,11 +96,15 @@ def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数
         else:  # 分数运算 和上面流程大致相同
             expression, print_expression = fraction(area)  # 生成一个分数运算
             results = demical_to_fraction(eval(expression))
-        if results >= 0 and (str(results) not in answers or print_expression not in prints):  # 结果不为负, 答案不重复
+        # print_expression_nums = list(filter(str.isdigit, print_expression))  # ['2','+',1']
+        print_expression_nums = print_expression.replace('(', '').replace(')', '').split()
+        print_expression_nums.sort()  # ['+', 1', '2']
+        if results < 0 or ((str(results)in answers) and (print_expression_nums in str_num)):  # 去重复
+            problem(area)
+        else:
             prints.append(print_expression)
             answers.append(str(results))  # 答案列表
-        else:  # 去重复
-            problem(area)
+            str_num.append(print_expression_nums)
     except Exception as e:  # 过滤分母为0的错误
         problem(area)
 
@@ -124,9 +129,10 @@ def compare(txt_list):  # 对比题目和答案文件
     print('Correct: {}{}'.format(len(correct), tuple(correct))+'\n' + 'Wrong: {}{}'.format(len(wrong), tuple(wrong)))
 
 
+start = datetime.datetime.now()
 opts, args = getopt.getopt(sys.argv[1:], "hn:r:e:a:")  # 用getopt接收参数
 operators = ['+', '-', '*', '/']
-answers, prints = [], []
+answers, prints, str_num = [], [], []
 
 if '-r' in opts[len(opts)-1]:  # 题目数值范围
     problem_num = opts[0][1]
@@ -139,9 +145,13 @@ elif '-n' in opts[0]:  # 参数控制生成题目的个数（必须）
     problem_num = opts[0][1]
     for j in range(int(problem_num)):
         problem()  # 不带 -r 参数就用默认参数生成题目
+        print(prints[j] + ' = ')
+    write_to_file(answers, prints)
 if '-e' in opts[0] or '-a' in opts[0]:  # 对答案
     txt_list = []  # 题目文件和答案文件
     for i in opts:
         txt_list.append(i[1])  # Exercises.txt 和 Answers.txt
     compare(txt_list)
     print(txt_list)
+end = datetime.datetime.now()
+print('运算时间： {}'.format(end - start))
