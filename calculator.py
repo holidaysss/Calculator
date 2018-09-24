@@ -3,6 +3,7 @@ import sys
 import random
 from fractions import Fraction
 import datetime
+from pyecharts import Liquid
 
 
 def find_cycle(demical):  # 参数为小数部分
@@ -127,6 +128,36 @@ def compare(txt_list):  # 对比题目和答案文件
         print('{} : {}'.format(result[:-1], problem[problem.index('=')+2:-1]))
         correct.append(i + 1) if result[result.index('.')+1:-1] == (problem[problem.index('=')+2:-1]) else wrong.append(i+1)  # 对比答案
     print('Correct: {}{}'.format(len(correct), tuple(correct))+'\n' + 'Wrong: {}{}'.format(len(wrong), tuple(wrong)))
+    return len(correct), len(wrong)
+
+
+def run(opts):
+    problem_num = '0'
+    if '-r' in opts[len(opts)-1]:  # 题目数值范围
+        problem_num = opts[0][1]
+        area = opts[1][1]
+        for j in range(int(problem_num)):
+            problem(area=int(area))  # 生成题目
+            # print(prints[j] + ' = ')
+        write_to_file(answers, prints)
+    elif '-n' in opts[0]:  # 参数控制生成题目的个数（必须）
+        problem_num = opts[0][1]
+        for j in range(int(problem_num)):
+            problem()  # 不带 -r 参数就用默认参数生成题目
+            print(prints[j] + ' = ')
+        write_to_file(answers, prints)
+    if '-e' in opts[0] or '-a' in opts[0]:  # 对答案
+        txt_list = []  # 题目文件和答案文件
+        for i in opts:
+            txt_list.append(i[1])  # Exercises.txt 和 Answers.txt
+        r, w = compare(txt_list)
+        accuracy = r/(r+w)  # 正确率
+        liquid = Liquid("正确率(总{}道)：".format(str(len(open('Answers.txt', 'r').readlines()))))  # 生成水球图
+        liquid.add('Correct', [accuracy], is_liquid_outline_show=False)
+        liquid.render()
+    nums = len(prints)
+    problem_num = int(problem_num)
+    return nums, problem_num
 
 
 start = datetime.datetime.now()
@@ -134,24 +165,7 @@ opts, args = getopt.getopt(sys.argv[1:], "hn:r:e:a:")  # 用getopt接收参数
 operators = ['+', '-', '*', '/']
 answers, prints, str_num = [], [], []
 
-if '-r' in opts[len(opts)-1]:  # 题目数值范围
-    problem_num = opts[0][1]
-    area = opts[1][1]
-    for j in range(int(problem_num)):
-        problem(area=int(area))  # 生成题目
-        print(prints[j] + ' = ')
-    write_to_file(answers, prints)
-elif '-n' in opts[0]:  # 参数控制生成题目的个数（必须）
-    problem_num = opts[0][1]
-    for j in range(int(problem_num)):
-        problem()  # 不带 -r 参数就用默认参数生成题目
-        print(prints[j] + ' = ')
-    write_to_file(answers, prints)
-if '-e' in opts[0] or '-a' in opts[0]:  # 对答案
-    txt_list = []  # 题目文件和答案文件
-    for i in opts:
-        txt_list.append(i[1])  # Exercises.txt 和 Answers.txt
-    compare(txt_list)
-    print(txt_list)
-end = datetime.datetime.now()
-print('运算时间： {}'.format(end - start))
+if __name__ == '__main__':
+    run(opts)
+    end = datetime.datetime.now()
+    print('运算时间： {}'.format(end - start))
