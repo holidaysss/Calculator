@@ -75,7 +75,7 @@ def fraction(area):  # 生成一个分数运算
     operator_num = random.randint(1, 3)  # 随机运算符
     num = gen_fraciton(area)
     expression = print_expression = str(num)  # 第一个分数
-    bracket = (random.choice(['(', '']) if not operator_num == 1 else '')
+    bracket = (random.choice(['(', '']) if operator_num != 1 else '')  # 超过一个运算符才需要加括号
     for i in range(operator_num):
         op = str(random.choice(operators))
         if op == '-':  # 若为'-',生成分数小于等于前一个分数
@@ -93,7 +93,7 @@ def fraction(area):  # 生成一个分数运算
                 print_expression += ' ' + change(op) + ' ' + str(num) + bracket
             expression += op + str(num) + bracket
         else:
-            if float(num) > 1:
+            if float(num) >= 1:
                 print_expression += ' ' + change(op) + ' ' + bracket + str(int(num)) + "'" + str(num - int(num))
             else:
                 print_expression += ' ' + change(op) + ' ' + bracket + str(num)
@@ -103,18 +103,17 @@ def fraction(area):  # 生成一个分数运算
 
 
 def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数运算)，运算符不超过3个
-    flag = random.randint(1, 2)  # 随机生成 自然数或分数 的四则运算
     try:
-        if flag==1:  # 自然数运算
+        if random.choice([1, 2]) == 1:  # 随机生成 自然数或分数 的四则运算
             expression, print_expression = natural(area)  # 生成一个自然数运算
             results = demical_to_fraction(eval(expression))  # 运算结果通过demical_to_fraction()转成分数
-        else:  # 分数运算 和上面流程大致相同
+        else:  # 分数四则运算 和上面流程大致相同
             expression, print_expression = fraction(area)  # 生成一个分数运算
             results = demical_to_fraction(eval(expression))
         # print_expression_nums = list(filter(str.isdigit, print_expression))  # ['2','+',1']
         print_expression_nums = print_expression.replace('(', '').replace(')', '').split()  # 将输出表达式拆解
         print_expression_nums.sort()  # ['+', 1', '2']
-        if results < 0 or ((str(results)in answers) and (print_expression_nums in str_num)):  # 去重复
+        if results < 0 or ((str(results)in answers) and (print_expression_nums in str_num)):  # 去负答案，去重复
             problem(area)
         else:
             prints.append(print_expression)

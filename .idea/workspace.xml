@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bc4ed16-49f3-4988-862e-d1839ba39703" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Answers.txt" afterPath="$PROJECT_DIR$/Answers.txt" />
       <change beforePath="$PROJECT_DIR$/Exercises.txt" afterPath="$PROJECT_DIR$/Exercises.txt" />
       <change beforePath="$PROJECT_DIR$/calculator.py" afterPath="$PROJECT_DIR$/calculator.py" />
-      <change beforePath="$PROJECT_DIR$/render.html" afterPath="$PROJECT_DIR$/render.html" />
-      <change beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,19 +15,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="calculator.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="calculator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/calculator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="101" selection-end-column="39" />
+            <state relative-caret-position="2046">
+              <caret line="112" column="93" lean-forward="true" selection-start-line="112" selection-start-column="93" selection-end-line="112" selection-end-column="93" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#166#546#0" expanded="false" />
                 <element signature="e#603#1475#0" expanded="false" />
                 <element signature="e#1512#1556#0" expanded="false" />
-                <element signature="e#5178#5488#0" expanded="false" />
-                <element signature="e#5531#6054#0" expanded="false" />
-                <element signature="e#6076#7123#0" expanded="false" />
+                <element signature="e#1595#2533#0" expanded="false" />
+                <element signature="e#2576#2732#0" expanded="false" />
+                <element signature="e#5177#5487#0" expanded="false" />
+                <element signature="e#5530#6053#0" expanded="false" />
+                <element signature="e#6075#7122#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -48,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testt.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="testt.py" pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/PycharmProjects/WC/testt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="41" column="28" lean-forward="false" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
+            <state relative-caret-position="66">
+              <caret line="2" column="49" lean-forward="true" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -84,7 +83,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="264" />
     <option name="y" value="55" />
     <option name="width" value="1067" />
@@ -266,7 +265,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="32" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06822917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -274,7 +273,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19002123" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19002123" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -293,7 +292,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -307,9 +306,11 @@
             <element signature="e#166#546#0" expanded="false" />
             <element signature="e#603#1475#0" expanded="false" />
             <element signature="e#1512#1556#0" expanded="false" />
-            <element signature="e#5178#5488#0" expanded="false" />
-            <element signature="e#5531#6054#0" expanded="false" />
-            <element signature="e#6076#7123#0" expanded="false" />
+            <element signature="e#1595#2533#0" expanded="false" />
+            <element signature="e#2576#2732#0" expanded="false" />
+            <element signature="e#5177#5487#0" expanded="false" />
+            <element signature="e#5530#6053#0" expanded="false" />
+            <element signature="e#6075#7122#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -333,9 +334,11 @@
             <element signature="e#166#546#0" expanded="false" />
             <element signature="e#603#1475#0" expanded="false" />
             <element signature="e#1512#1556#0" expanded="false" />
-            <element signature="e#5178#5488#0" expanded="false" />
-            <element signature="e#5531#6054#0" expanded="false" />
-            <element signature="e#6076#7123#0" expanded="false" />
+            <element signature="e#1595#2533#0" expanded="false" />
+            <element signature="e#2576#2732#0" expanded="false" />
+            <element signature="e#5177#5487#0" expanded="false" />
+            <element signature="e#5530#6053#0" expanded="false" />
+            <element signature="e#6075#7122#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -359,9 +362,11 @@
             <element signature="e#166#546#0" expanded="false" />
             <element signature="e#603#1475#0" expanded="false" />
             <element signature="e#1512#1556#0" expanded="false" />
-            <element signature="e#5178#5488#0" expanded="false" />
-            <element signature="e#5531#6054#0" expanded="false" />
-            <element signature="e#6076#7123#0" expanded="false" />
+            <element signature="e#1595#2533#0" expanded="false" />
+            <element signature="e#2576#2732#0" expanded="false" />
+            <element signature="e#5177#5487#0" expanded="false" />
+            <element signature="e#5530#6053#0" expanded="false" />
+            <element signature="e#6075#7122#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -385,9 +390,11 @@
             <element signature="e#166#546#0" expanded="false" />
             <element signature="e#603#1475#0" expanded="false" />
             <element signature="e#1512#1556#0" expanded="false" />
-            <element signature="e#5178#5488#0" expanded="false" />
-            <element signature="e#5531#6054#0" expanded="false" />
-            <element signature="e#6076#7123#0" expanded="false" />
+            <element signature="e#1595#2533#0" expanded="false" />
+            <element signature="e#2576#2732#0" expanded="false" />
+            <element signature="e#5177#5487#0" expanded="false" />
+            <element signature="e#5530#6053#0" expanded="false" />
+            <element signature="e#6075#7122#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -418,9 +425,11 @@
             <element signature="e#166#546#0" expanded="false" />
             <element signature="e#603#1475#0" expanded="false" />
             <element signature="e#1512#1556#0" expanded="false" />
-            <element signature="e#5178#5488#0" expanded="false" />
-            <element signature="e#5531#6054#0" expanded="false" />
-            <element signature="e#6076#7123#0" expanded="false" />
+            <element signature="e#1595#2533#0" expanded="false" />
+            <element signature="e#2576#2732#0" expanded="false" />
+            <element signature="e#5177#5487#0" expanded="false" />
+            <element signature="e#5530#6053#0" expanded="false" />
+            <element signature="e#6075#7122#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -444,9 +453,11 @@
             <element signature="e#166#546#0" expanded="false" />
             <element signature="e#603#1475#0" expanded="false" />
             <element signature="e#1512#1556#0" expanded="false" />
-            <element signature="e#5178#5488#0" expanded="false" />
-            <element signature="e#5531#6054#0" expanded="false" />
-            <element signature="e#6076#7123#0" expanded="false" />
+            <element signature="e#1595#2533#0" expanded="false" />
+            <element signature="e#2576#2732#0" expanded="false" />
+            <element signature="e#5177#5487#0" expanded="false" />
+            <element signature="e#5530#6053#0" expanded="false" />
+            <element signature="e#6075#7122#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -478,27 +489,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/WC/testt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="41" column="28" lean-forward="false" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/calculator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="101" selection-end-column="39" />
+        <state relative-caret-position="2046">
+          <caret line="112" column="93" lean-forward="true" selection-start-line="112" selection-start-column="93" selection-end-line="112" selection-end-column="93" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <element signature="e#166#546#0" expanded="false" />
             <element signature="e#603#1475#0" expanded="false" />
             <element signature="e#1512#1556#0" expanded="false" />
-            <element signature="e#5178#5488#0" expanded="false" />
-            <element signature="e#5531#6054#0" expanded="false" />
-            <element signature="e#6076#7123#0" expanded="false" />
+            <element signature="e#1595#2533#0" expanded="false" />
+            <element signature="e#2576#2732#0" expanded="false" />
+            <element signature="e#5177#5487#0" expanded="false" />
+            <element signature="e#5530#6053#0" expanded="false" />
+            <element signature="e#6075#7122#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/PycharmProjects/WC/testt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="2" column="49" lean-forward="true" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
