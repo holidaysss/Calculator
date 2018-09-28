@@ -3,7 +3,7 @@ import sys
 import random
 from fractions import Fraction
 import datetime
-from pyecharts import Liquid
+# from pyecharts import Liquid
 
 
 def find_cycle(demical):  # 找小数的循环体(参数为小数部分)
@@ -63,6 +63,13 @@ def natural(area):  # 生成一个自然数运算
     return expression, print_expression
 
 
+def turn_fracrtion(results):  # 假分数转带分数
+    if isinstance(eval(str(results)), int) or (eval(str(results)) < 1):  # 整数和真分数
+        return str(results)
+    else:
+        return str(int(results)) + "'" + str(results - int(results))  # 假分数
+
+
 def gen_fraciton(area):  # 生成一个规范分数
     while True:
         a = random.randint(1, area)
@@ -88,13 +95,13 @@ def fraction(area):  # 生成一个分数运算
             num = gen_fraciton(area)
         if bracket == ')':
             if float(num) > 1:  # 假分数转带分数 例：8/3 -> 2'2/3
-                print_expression += ' ' + change(op) + ' ' + str(int(num)) + "'" + str(num - int(num)) + bracket
+                print_expression += ' ' + change(op) + ' ' + turn_fracrtion(num) + bracket
             else:
                 print_expression += ' ' + change(op) + ' ' + str(num) + bracket
             expression += op + str(num) + bracket
         else:
             if float(num) >= 1:
-                print_expression += ' ' + change(op) + ' ' + bracket + str(int(num)) + "'" + str(num - int(num))
+                print_expression += ' ' + change(op) + ' ' + bracket + turn_fracrtion(num)
             else:
                 print_expression += ' ' + change(op) + ' ' + bracket + str(num)
             expression += op + bracket + str(num)
@@ -116,8 +123,9 @@ def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数
         if results < 0 or ((str(results)in answers) and (print_expression_nums in str_num)):  # 去负答案，去重复
             problem(area)
         else:
+            results = turn_fracrtion(results)  # 转化
             prints.append(print_expression)
-            answers.append(str(results))  # 答案列表
+            answers.append(results)  # 答案列表
             str_num.append(print_expression_nums)
     except Exception as e:  # 过滤分母为0的错误
         problem(area)
