@@ -37,8 +37,9 @@ def demical_to_fraction(n, zero_num=0):  # 小数转化分数
                 fraction = Fraction(int(result), int('9'*length))  # 小数部分转化为分数 /数学知识需要了解
                 final_num = int(real_num) + fraction  # 小数点前的部分需要从重新加上
                 return final_num/(10**zero_num)  # 回退移的位数
-        # else:
-        #     return float(n)
+        else:
+            return 0
+
 
 def change(a):   # *,/ 转成 ×，÷
     return a.replace('*', '×').replace("/", '÷')
@@ -121,8 +122,7 @@ def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数
         if not results:  # 无法转分数
             problem(area)
             return 0
-        # print_expression_nums = list(filter(str.isdigit, print_expression))  # ['2','+',1']
-        print_expression_nums = print_expression.replace('(', '').replace(')', '').split()  # 将输出表达式拆解
+        print_expression_nums = print_expression.split()  # 将输出表达式拆解
         print_expression_nums.sort()  # ['+', 1', '2']
         if results < 0 or ((str(results)in answers) and (print_expression_nums in str_num)):  # 去负答案，去重复
             problem(area)
