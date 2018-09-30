@@ -72,7 +72,7 @@ def turn_fracrtion(results):  # 假分数转带分数
         return str(int(results)) + "'" + str(results - int(results))  # 假分数
 
 
-def gen_fraciton(area):  # 生成一个规范分数
+def gen_fraciton(area):  # 生成一个规范分数 ex:3/8, 8/3. not 3/3, 9/3
     while True:
         a = random.randint(1, area)
         b = random.randint(1, area)
@@ -93,7 +93,7 @@ def fraction(area):  # 生成一个分数运算
                 if next_num <= num:
                     break
             num = next_num
-        else:
+        else:  # 其他符号 生成一个分数
             num = gen_fraciton(area)
         if bracket == ')':
             if float(num) > 1:  # 假分数转带分数 例：8/3 -> 2'2/3
@@ -145,13 +145,15 @@ def write_to_file(answers, expressions):
 
 
 def compare(txt_list):  # 对比题目和答案文件
+    result_list = []
     correct = []
     wrong = []  # 正确错误题目列表
-    for i in range(len(open(txt_list[1], 'r').readlines())):  # 读取答案文件的行数，循环对比
-        result = open(txt_list[1], 'r').readlines()[i]  # 第i行
-        problem = open(txt_list[0], 'r').readlines()[i]
-        correct.append(i + 1) if result[result.index('.')+1:-1] == (problem[problem.index('=')+2:-1]) else wrong.append(i+1)  # 对比答案
-    print('Correct: {}{}'.format(len(correct), tuple(correct))+'\n' + 'Wrong: {}{}'.format(len(wrong), tuple(wrong)))
+    for a in open(txt_list[1], 'r').readlines():
+        result_list.append(a[a.index('.')+1:-1])
+    for i, v in enumerate(open(txt_list[0], 'r').readlines()):
+        problem_result = v[v.index('=')+2:-1]
+        correct.append(i+1) if result_list[i] == problem_result else wrong.append(i+1)  # 对比答案
+    print('Correct: {}{}'.format(len(correct), tuple(correct)) + '\n' + 'Wrong: {}{}'.format(len(wrong), tuple(wrong)))
     return len(correct), len(wrong)
 
 
@@ -178,7 +180,7 @@ def run(opts):
         accuracy = r/(r+w)  # 正确率
         liquid = Liquid("正确率(总{}道)：".format(str(len(open('Answers.txt', 'r').readlines()))))  # 生成水球图
         liquid.add('Correct', [accuracy], is_liquid_outline_show=False)
-        liquid.render()
+        liquid.render('成绩水型球.html')
     nums = len(prints)
     problem_num = int(problem_num)
     return nums, problem_num
