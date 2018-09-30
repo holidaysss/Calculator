@@ -3,18 +3,18 @@ import sys
 import random
 from fractions import Fraction
 import datetime
-# from pyecharts import Liquid
+from pyecharts import Liquid
 
 
 def find_cycle(demical):  # 找小数的循环体(参数为小数部分)
     for i in range(1, 17):
         cycle_part = demical[:i]  # 截取小数部分的前i位，假设为循环体
         if len(cycle_part) < 4:  # 如果循环体较短
-            if (cycle_part*i*4) == demical[:4*i]:  # 需要满足4次重复
+            if (cycle_part*3) == demical[:3*i]:  # 需要满足4次重复
                 return cycle_part  # 满足才认定为循环体
-        # else:  # 如果循环体较长
-        #     if (cycle_part*i*2) == demical[:2*i]:  # 满足2次重复
-        #         return cycle_part
+        else:  # 如果循环体较长
+            if (cycle_part*2) == demical[:2*i]:  # 满足2次重复
+                return cycle_part
     return 0  # 找不到循环体，返回0
 
 
@@ -37,7 +37,8 @@ def demical_to_fraction(n, zero_num=0):  # 小数转化分数
                 fraction = Fraction(int(result), int('9'*length))  # 小数部分转化为分数 /数学知识需要了解
                 final_num = int(real_num) + fraction  # 小数点前的部分需要从重新加上
                 return final_num/(10**zero_num)  # 回退移的位数
-
+        # else:
+        #     return float(n)
 
 def change(a):   # *,/ 转成 ×，÷
     return a.replace('*', '×').replace("/", '÷')
@@ -117,6 +118,9 @@ def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数
         else:  # 分数四则运算 和上面流程大致相同
             expression, print_expression = fraction(area)  # 生成一个分数运算
             results = demical_to_fraction(eval(expression))
+        if not results:  # 无法转分数
+            problem(area)
+            return 0
         # print_expression_nums = list(filter(str.isdigit, print_expression))  # ['2','+',1']
         print_expression_nums = print_expression.replace('(', '').replace(')', '').split()  # 将输出表达式拆解
         print_expression_nums.sort()  # ['+', 1', '2']
@@ -127,7 +131,7 @@ def problem(area=10):  # 随机生成一道题目(自然数四则运算或分数
             prints.append(print_expression)
             answers.append(results)  # 答案列表
             str_num.append(print_expression_nums)
-    except Exception as e:  # 过滤分母为0的错误
+    except Exception:  # 过滤分母为0的题目
         problem(area)
 
 
@@ -158,13 +162,13 @@ def run(opts):
         area = opts[1][1]
         for j in range(int(problem_num)):
             problem(area=int(area))  # 生成题目
-            print(prints[j] + ' = ')
+            # print(prints[j] + ' = ')
         write_to_file(answers, prints)
     elif '-n' in opts[0]:  # 参数控制生成题目的个数（必须）
         problem_num = opts[0][1]
         for j in range(int(problem_num)):
             problem()  # 不带 -r 参数就用默认参数生成题目
-            print(prints[j] + ' = ')
+            # print(prints[j] + ' = ')
         write_to_file(answers, prints)
     if '-e' in opts[0] or '-a' in opts[0]:  # 对答案
         txt_list = []  # 题目文件和答案文件
